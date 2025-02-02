@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+head,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.mh-70 {
+  max-height: 70px;
+}
+
+.card-img {
+  max-width: 150px;
+  object-fit: cover;
+}
+
+.max-width {
+  max-width: 1200px;
+}
+
+.card-size {
+  max-height: 250px;
+}
+
+.img-about {
+  height: 200px;
+}
+
+.shadow-transition {
+  transition: all 0.3s ease-out;
+}
+
+.shadow-transition:hover {
+  box-shadow: 0px 40px 40px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.footer {
+  background: linear-gradient(90deg, #5c3d2e, #8a6d52, #c3a884);
+  color: rgba(255, 255, 255, 0.9);
+}
