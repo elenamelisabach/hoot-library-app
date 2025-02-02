@@ -1,12 +1,4 @@
-import {
-  Nav,
-  Navbar,
-  Container,
-  Form,
-  Col,
-  Image,
-  Stack,
-} from "react-bootstrap";
+import { Nav, Navbar, Container, Image, Stack } from "react-bootstrap";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoBagCheck } from "react-icons/io5";
@@ -14,6 +6,9 @@ import styles from "./Header.module.css";
 import { Search } from "../Search/Search";
 import { AddToCart } from "../AddToCart";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { BookDetailPage } from "../../pages";
+
 const urls = [
   { label: "Fantasy", value: "fantasy" },
   { label: "History", value: "history" },
@@ -27,6 +22,9 @@ export function Header() {
   const navigate = useNavigate();
   const { section } = useParams();
   const bagCheck = useSelector((state) => state.bagCheck.list);
+  const location = useLocation();
+
+  const isBookDetailsPage = location.pathname.startsWith("/books/");
 
   function onRouteChange(route) {
     navigate(`/section/${route}`);
@@ -68,7 +66,7 @@ export function Header() {
             ))}
           </Nav>
           <Stack className="d-flex align-items-center">
-            <Search />
+            {!isBookDetailsPage && <Search />}
           </Stack>
           <Stack className=" position-relative  justify-content-center align-items-center me-5">
             {/* Coș de cumpărături */}
@@ -80,7 +78,7 @@ export function Header() {
               className="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"
               style={{ transform: "translate(50%, -50%)" }}
             >
-              {bagCheck.length}
+              {bagCheck.reduce((total, book) => total + book.quantity, 0)}
             </span>
           </Stack>
         </Navbar.Collapse>

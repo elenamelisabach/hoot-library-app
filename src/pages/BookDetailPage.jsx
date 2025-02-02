@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hook/useFetch";
 import { BookPrice } from "../components/BookPrice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getBookByIdUrl } from "../dataBooks/books";
+import { addToBagCheck } from "../redux/BagCheckSlice";
 import {
   Row,
   Button,
@@ -10,12 +12,15 @@ import {
   Container,
   Image,
   ListGroup,
-  Card,
+  Spinner,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
 
-export function BookDetailPage() {
+export function BookDetailPage({}) {
   const { title } = useParams();
+  const dispatch = useDispatch();
+
+  const bagCheck = useSelector((state) => state.bagCheck.list);
+  const isAddedToCart = bagCheck.some((book) => book.title === title);
 
   const url = getBookByIdUrl({ title });
   const { data, loading } = useFetch(url);
@@ -26,7 +31,7 @@ export function BookDetailPage() {
     ? `https://openlibrary.org/works/${encodeURIComponent(workId)}.json`
     : null; // Ensure there's no unnecessary URL if workId is invalid
 
-  const { data: workData, error: workDataError } = useFetch(descriptionUrl);
+  const { data: workData, loading: loadingWorkData } = useFetch(descriptionUrl);
 
   const description =
     workData?.description?.value || // First check for description value
@@ -37,8 +42,22 @@ export function BookDetailPage() {
     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
     : "https://media.istockphoto.com/id/1093292834/vector/photo-coming-soon-picture-frame-vector-illustration.jpg?s=612x612&w=0&k=20&c=zacmLNhrQoir0Cu4ppV3F7EiDYSyZTXL59JFT2LS784=";
 
-  console.log("Fetching data from URL:", descriptionUrl);
+  if (loading || loadingWorkData) {
+    return (
+      <Container className="min-vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
 
+  function handleAddToCart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch(addToBagCheck({ title }));
+  }
   return (
     <Container fluid className="min-vh-100 mt-5 px-3">
       <Row className="justify-content-center align-items-center">
@@ -97,7 +116,11 @@ export function BookDetailPage() {
 
           <Row className="justify-content-center mt-4">
             <Col xs={12} sm={8} md={6} lg={4}>
-              <Button variant="success" className="w-100 p-2 mb-2 rounded">
+              <Button
+                onClick={handleAddToCart}
+                variant="success"
+                className="w-100 p-2 mb-2 rounded"
+              >
                 Add to basket
               </Button>
             </Col>

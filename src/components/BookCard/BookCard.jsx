@@ -1,21 +1,10 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BookPrice } from "../BookPrice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBagCheck } from "../../redux/BagCheckSlice";
 
-export function BookCard({
-  book,
-  author_name,
-  cover_i,
-  first_publish_year,
-  title,
-  subject,
-  key,
-  price,
-  bib_key,
-  work_id,
-}) {
+export function BookCard({ author_name, cover_i, title, subject, key, price }) {
   const dispatch = useDispatch();
   const bagCheck = useSelector((state) => state.bagCheck.list);
   const isAddedToCart = bagCheck.some((book) => book.title === title);
@@ -30,7 +19,7 @@ export function BookCard({
 
     dispatch(addToBagCheck({ title, author_name, cover_i, price, key }));
   }
-  console.log("Price", price);
+
   return (
     <Link
       to={`/books/${encodeURIComponent(title)}`}

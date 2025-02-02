@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row, Image } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Row,
+  Image,
+  Alert,
+} from "react-bootstrap";
 export function Contact() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -9,6 +17,7 @@ export function Contact() {
   });
 
   const [validated, setValidated] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +37,14 @@ export function Contact() {
     // You can handle form submission here if everything is valid
     if (form.checkValidity()) {
       console.log("Form submitted:", formData);
+      setSubmitted(true); // Setează formularul ca fiind trimis
+      // Resetează formularul după trimitere (opțional)
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      });
     }
   };
 
@@ -40,6 +57,7 @@ export function Contact() {
       </Row>
       <Row className="d-flex align-items-center h-100 bg-body-tertiary ">
         {/* Image column */}
+
         <Col
           xs={12}
           md={6}
@@ -59,78 +77,99 @@ export function Contact() {
           md={6}
           className="d-flex justify-content-center align-items-center"
         >
-          <Form
-            noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
-            className="w-100"
-            style={{ maxWidth: "500px" }}
-          >
-            <Form.Group className="mb-3">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your first name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                First name is required.
-              </Form.Control.Feedback>
-            </Form.Group>
+          {!submitted ? (
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+              className="w-100"
+              style={{ maxWidth: "500px" }}
+            >
+              <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your first name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  First name is required.
+                </Form.Control.Feedback>
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your last name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Last name is required.
-              </Form.Control.Feedback>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your last name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Last name is required.
+                </Form.Control.Feedback>
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter your email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid email address.
-              </Form.Control.Feedback>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter your email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid email address.
+                </Form.Control.Feedback>
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Message</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Enter your message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Message is required.
-              </Form.Control.Feedback>
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Message</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Enter your message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Message is required.
+                </Form.Control.Feedback>
+              </Form.Group>
 
-            <Button type="submit" className="btn-success w-100">
-              Submit
-            </Button>
-          </Form>
+              <Button type="submit" className="btn-success w-100">
+                Submit
+              </Button>
+            </Form>
+          ) : (
+            <Row className="justify-content-center">
+              <Col xs={12} md={8}>
+                <Alert variant="success" className="text-center">
+                  <Alert.Heading>Thank you for contacting us!</Alert.Heading>
+                  <p>
+                    We appreciate you reaching out. Our team is reviewing your
+                    message and will get back to you as soon as possible. We
+                    value your feedback and will make sure to address your
+                    inquiry promptly.
+                  </p>
+                  <hr />
+                  <p className="mb-0">
+                    In the meantime, feel free to browse our website for more
+                    information or explore other sections. Have a great day!
+                  </p>
+                </Alert>
+              </Col>
+            </Row>
+          )}
         </Col>
       </Row>
     </Container>

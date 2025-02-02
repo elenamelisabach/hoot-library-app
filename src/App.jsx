@@ -6,6 +6,7 @@ import { Footer, AboutUs, Contact } from "./components";
 import { Header } from "./components/Header/Header";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { Checkout } from "./pages";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/books/:title" element={<BookDetailPage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
           <Footer />
         </BrowserRouter>
