@@ -25,11 +25,10 @@ export function Footer() {
         <Col md={4} className="d-flex flex-column align-items-center">
           <h5>Quick Links</h5>
           <Nav>
-            {/* Link-ul About Us va naviga către /about */}
             <Nav.Link onClick={handleNavigateToAbout} className="text-white">
               About Us
             </Nav.Link>
-            {/* Link-ul Contact va naviga către /contact */}
+
             <Nav.Link onClick={handleNavigateToContact} className="text-white">
               Contact
             </Nav.Link>

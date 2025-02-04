@@ -9,7 +9,6 @@ export function AboutUs() {
         </Col>
       </Row>
       <Row className="align-items-stretch">
-        {/* Image Column */}
         <Col
           xs={12}
           md={6}
@@ -24,7 +23,6 @@ export function AboutUs() {
           />
         </Col>
 
-        {/* Accordion Column */}
         <Col xs={12} md={6} className="d-flex align-items-center">
           <Accordion defaultActiveKey="0" className="w-100 p-4">
             <Accordion.Item eventKey="0">

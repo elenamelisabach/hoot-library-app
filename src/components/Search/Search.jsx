@@ -23,15 +23,15 @@ export function Search() {
   };
 
   function handleSubmit(e) {
-    e.preventDefault(); // Previne refresh-ul paginii
+    e.preventDefault();
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="d-flex px-5">
+    <Form onSubmit={handleSubmit} className="d-flex  px-5">
       <Form.Control
         value={text}
         size="lg"
-        type="text"
+        type="search"
         placeholder="Search..."
         className="w-100"
         onChange={handleSearch}

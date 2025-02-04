@@ -7,3 +7,4 @@ export * from "./BookCard/BookCard";
 export * from "./Search/Search";
 export * from "./BookPrice";
 export * from "./AddToCart";
+export * from "./ImageCover";

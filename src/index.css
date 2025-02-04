@@ -21,10 +21,6 @@ code {
     monospace;
 }
 
-.mh-70 {
-  max-height: 70px;
-}
-
 .card-img {
   max-width: 150px;
   object-fit: cover;
@@ -42,6 +38,11 @@ code {
   height: 200px;
 }
 
+#img-cart {
+  width: 50px !important;
+  height: 75px;
+}
+
 .shadow-transition {
   transition: all 0.3s ease-out;
 }
@@ -54,4 +55,9 @@ code {
 .footer {
   background: linear-gradient(90deg, #5c3d2e, #8a6d52, #c3a884);
   color: rgba(255, 255, 255, 0.9);
+}
+
+.order-img {
+  max-width: 100%;
+  height: auto;
 }

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "../hook/useFetch";
 import { BookPrice } from "../components/BookPrice";
 import { useDispatch, useSelector } from "react-redux";
+import { useCoverUrl } from "../dataBooks/books";
 
 import { getBookByIdUrl } from "../dataBooks/books";
 import { addToBagCheck } from "../redux/BagCheckSlice";
@@ -15,7 +16,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-export function BookDetailPage({}) {
+export function BookDetailPage() {
   const { title } = useParams();
   const dispatch = useDispatch();
 
@@ -29,14 +30,14 @@ export function BookDetailPage({}) {
   const workId = book?.key?.split("/").pop();
   const descriptionUrl = workId
     ? `https://openlibrary.org/works/${encodeURIComponent(workId)}.json`
-    : null; // Ensure there's no unnecessary URL if workId is invalid
+    : null;
 
   const { data: workData, loading: loadingWorkData } = useFetch(descriptionUrl);
 
   const description =
-    workData?.description?.value || // First check for description value
-    workData?.description || // Fallback to raw description (if available)
-    "No description available"; // Default if no description exists
+    workData?.description?.value ||
+    workData?.description ||
+    "No description available";
 
   const coverUrl = book.cover_i
     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
@@ -61,7 +62,6 @@ export function BookDetailPage({}) {
   return (
     <Container fluid className="min-vh-100 mt-5 px-3">
       <Row className="justify-content-center align-items-center">
-        {/* Coloană pentru imagine */}
         <Col
           xs={12}
           md={4}
@@ -76,7 +76,6 @@ export function BookDetailPage({}) {
           />
         </Col>
 
-        {/* Coloană pentru detalii */}
         <Col
           xs={12}
           md={6}

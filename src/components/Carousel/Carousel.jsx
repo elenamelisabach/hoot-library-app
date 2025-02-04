@@ -7,7 +7,6 @@ export function CustomCarousel() {
     <Container fluid className="bs-secondary-bg">
       <Container>
         <Carousel className=" justify-content-center align-items-center m-auto">
-          {/* Primul Slide */}
           <Carousel.Item>
             <Image
               className="d-block w-100 "
@@ -27,7 +26,6 @@ export function CustomCarousel() {
             </Carousel.Caption>
           </Carousel.Item>
 
-          {/* Al doilea Slide */}
           <Carousel.Item>
             <Image
               className="d-block w-100"
@@ -46,7 +44,6 @@ export function CustomCarousel() {
             </Carousel.Caption>
           </Carousel.Item>
 
-          {/* Al treilea Slide */}
           <Carousel.Item>
             <Image
               className="d-block w-100"

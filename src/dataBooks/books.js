@@ -4,8 +4,8 @@ export const getBooksUrl = ({
   query,
   subject,
   fields = "key,title,author_name,first_publish_year,cover_i,number_of_pages,publishers ,",
-  limit = 100, // Number of books per page
-  page = 1, // Default to the first page
+  limit = 100,
+  page = 1,
   works,
   key,
   id,

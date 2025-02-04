@@ -4,7 +4,7 @@ import bagCheckReducer from "./BagCheckSlice";
 
 const store = configureStore({
   reducer: {
-    search: searchReducer, // Make sure it's added to the reducer
+    search: searchReducer,
     bagCheck: bagCheckReducer,
   },
 });

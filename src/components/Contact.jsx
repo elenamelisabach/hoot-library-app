@@ -28,17 +28,16 @@ export function Contact() {
     e.preventDefault();
     const form = e.target;
 
-    // Check if the form is valid
     if (form.checkValidity() === false) {
       e.stopPropagation();
     }
 
     setValidated(true);
-    // You can handle form submission here if everything is valid
+
     if (form.checkValidity()) {
       console.log("Form submitted:", formData);
-      setSubmitted(true); // Setează formularul ca fiind trimis
-      // Resetează formularul după trimitere (opțional)
+      setSubmitted(true);
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -56,8 +55,6 @@ export function Contact() {
         </Col>
       </Row>
       <Row className="d-flex align-items-center h-100 bg-body-tertiary ">
-        {/* Image column */}
-
         <Col
           xs={12}
           md={6}
@@ -71,7 +68,6 @@ export function Contact() {
           />
         </Col>
 
-        {/* Form column */}
         <Col
           xs={12}
           md={6}

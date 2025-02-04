@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BookPrice } from "../BookPrice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBagCheck } from "../../redux/BagCheckSlice";
+import { ImageCover } from "../ImageCover";
 
 export function BookCard({ author_name, cover_i, title, subject, key, price }) {
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ export function BookCard({ author_name, cover_i, title, subject, key, price }) {
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <Card className="w-100 h-100 d-flex flex-column justify-content-center align-items-center mb-4 shadow-lg shadow-transition p-3 mb-5 bg-white rounded">
-        <Card.Img className="card-img mt-4" variant="top" src={coverUrl} />
+        {/* <Card.Img className="card-img mt-4" variant="top" src={coverUrl} />*/}
+        <ImageCover className="card-img mt-4" variant="top" imageId={cover_i} />
         <Card.Body>
           <Card.Title className="mb-3 d-flex justify-content-center align-items-center">
             {title}

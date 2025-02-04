@@ -22,32 +22,26 @@ export function AddToCart({
     dispatch(removeFromBagCheck(title));
   };
   const handlePlaceOrder = () => {
-    // Poți verifica dacă coșul este gol înainte de a redirecționa
     if (bagCheck.length === 0) {
       alert("Your cart is empty!");
       return;
     }
 
-    // Dacă totul este în regulă, navighează la checkout
-    navigate("/checkout"); // Redirecționează către pagina de checkout
+    navigate("/checkout");
   };
 
   const addToCart = (book) => {
-    // Extrage prețul din localStorage
     const savedPrice = localStorage.getItem(`price-${book.title}`);
 
-    // Dacă prețul nu este găsit în localStorage, se poate folosi un preț de fallback
     const priceValue = savedPrice ? parseFloat(savedPrice) : 0;
 
-    // Crează obiectul bookData
     const bookData = {
       title: book.title,
       author_name: book.author_name,
       cover_i: book.cover_i,
-      price: priceValue, // Folosește prețul corect aici
+      price: priceValue,
     };
 
-    // Trimite acțiunea pentru a adăuga cartea în coș
     dispatch(addToBagCheck(bookData));
   };
 
@@ -58,7 +52,7 @@ export function AddToCart({
         (total, item) => total + parseFloat(item.price) * item.quantity,
         0
       )
-      .toFixed(2); // Rotunjește totalul la 2 zecimale
+      .toFixed(2);
   };
 
   const total = calculateTotal();

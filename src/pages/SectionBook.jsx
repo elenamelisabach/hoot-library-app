@@ -45,7 +45,7 @@ export function SectionPage() {
           ) : (
             <Row className="g-5">
               {books?.map((book) => {
-                const { key: bookKey, ...props } = book; // Extract key
+                const { key: bookKey, ...props } = book;
                 return (
                   <Col sm={6} md={5} lg={4} xl={3} key={book.key}>
                     <BookCard {...props} />

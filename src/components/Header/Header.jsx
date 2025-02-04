@@ -1,4 +1,12 @@
-import { Nav, Navbar, Container, Image, Stack } from "react-bootstrap";
+import {
+  Nav,
+  Navbar,
+  Container,
+  Image,
+  Stack,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoBagCheck } from "react-icons/io5";
@@ -34,8 +42,7 @@ export function Header() {
       <Container className="ms-2 text-light" fluid>
         <Link to="/" className={styles.logo}>
           <Image
-            className="mh-70 "
-            fluid
+            className={styles.mh70}
             src="https://png.pngtree.com/png-vector/20240516/ourmid/pngtree-famous-owl-logos-png-image_12481418.png"
             alt="Owl"
           />
@@ -48,8 +55,8 @@ export function Header() {
           HootLibrary
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav
             className="me-auto my-2 my-lg-0  "
             style={{ maxHeight: "100px" }}
@@ -65,27 +72,31 @@ export function Header() {
               </Nav.Link>
             ))}
           </Nav>
-          <Stack className="d-flex align-items-center">
-            {!isBookDetailsPage && <Search />}
-          </Stack>
-          <Stack className=" position-relative  justify-content-center align-items-center me-5">
-            {/* Coș de cumpărături */}
+        </Navbar.Collapse>
+        <Row className="flex-grow-1 w-100 ">
+          <Col className="">{!isBookDetailsPage && <Search />}</Col>
+        </Row>
+
+        <Row className="align-items-center justify-content-end">
+          <Col xs="auto" className="position-relative">
             <IoBagCheck
-              className="fs-2 text-white ms-auto"
+              className="fs-2 text-white ms-auto me-5"
               onClick={() => setShowCart(true)}
             />
             <span
-              className="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"
-              style={{ transform: "translate(50%, -50%)" }}
+              className="position-absolute top-0 start-50 translate-middle badge border border-light rounded-circle bg-danger p-2 "
+              style={{
+                transform: "translate(50%, -50%)",
+              }}
             >
               {bagCheck.reduce((total, book) => total + book.quantity, 0)}
             </span>
-          </Stack>
-        </Navbar.Collapse>
+          </Col>
+        </Row>
       </Container>
       <AddToCart
         show={showCart}
-        handleClose={() => setShowCart(false)} // Închide off-canvas-ul când se face click pe butonul de închidere
+        handleClose={() => setShowCart(false)}
         bagCheck={bagCheck}
       />
     </Navbar>
