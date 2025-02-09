@@ -38,11 +38,6 @@ code {
   height: 200px;
 }
 
-#img-cart {
-  width: 50px !important;
-  height: 75px;
-}
-
 .shadow-transition {
   transition: all 0.3s ease-out;
 }
@@ -60,4 +55,8 @@ code {
 .order-img {
   max-width: 100%;
   height: auto;
+}
+
+.category-color-text {
+  color: #a66b4b;
 }

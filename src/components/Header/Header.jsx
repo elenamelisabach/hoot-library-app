@@ -23,6 +23,7 @@ const urls = [
   { label: "Poetry", value: "poetry" },
   { label: "Science", value: "science" },
   { label: "Children", value: "children" },
+  { label: "Art", value: "art" },
 ];
 
 export function Header() {

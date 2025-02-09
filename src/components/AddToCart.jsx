@@ -4,6 +4,7 @@ import { removeFromBagCheck } from "../redux/BagCheckSlice";
 import { addToBagCheck } from "../redux/BagCheckSlice";
 import { BookPrice } from "./BookPrice";
 import { useNavigate } from "react-router-dom";
+import { ImageCover } from "./ImageCover";
 
 export function AddToCart({
   show,
@@ -71,13 +72,11 @@ export function AddToCart({
                 key={index}
                 className="d-flex justify-content-between align-items-center"
               >
-                <Image
-                  src={`https://covers.openlibrary.org/b/id/${item.cover_i}-S.jpg`}
+                <ImageCover
+                  imageId={item.cover_i} // Folosește `cover_i` pentru ID-ul imaginii
                   alt="No Image"
-                  width={50}
-                  height={75}
+                  style={{ width: "50px", height: "75px" }} // Poți ajusta dimensiunile
                   className="me-3"
-                  loading="lazy"
                 />
 
                 <Stack className="d-flex flex-column flex-grow-1">

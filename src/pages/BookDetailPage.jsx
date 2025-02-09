@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "../hook/useFetch";
 import { BookPrice } from "../components/BookPrice";
 import { useDispatch, useSelector } from "react-redux";
-import { useCoverUrl } from "../dataBooks/books";
+import { ImageCover } from "../components/ImageCover";
 
 import { getBookByIdUrl } from "../dataBooks/books";
 import { addToBagCheck } from "../redux/BagCheckSlice";
@@ -39,9 +39,9 @@ export function BookDetailPage() {
     workData?.description ||
     "No description available";
 
-  const coverUrl = book.cover_i
+  /*const coverUrl = book.cover_i
     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-    : "https://media.istockphoto.com/id/1093292834/vector/photo-coming-soon-picture-frame-vector-illustration.jpg?s=612x612&w=0&k=20&c=zacmLNhrQoir0Cu4ppV3F7EiDYSyZTXL59JFT2LS784=";
+    : "https://media.istockphoto.com/id/1093292834/vector/photo-coming-soon-picture-frame-vector-illustration.jpg?s=612x612&w=0&k=20&c=zacmLNhrQoir0Cu4ppV3F7EiDYSyZTXL59JFT2LS784=";*/
 
   if (loading || loadingWorkData) {
     return (
@@ -67,12 +67,20 @@ export function BookDetailPage() {
           md={4}
           className="d-flex justify-content-center mb-4 mb-md-0"
         >
-          <Image
+          {/*  <Image
             src={coverUrl}
             alt={book.title}
             fluid
             className="rounded"
             style={{ maxWidth: "100%", height: "auto", maxHeight: "500px" }}
+          />*/}
+
+          <ImageCover
+            imageId={book.cover_i}
+            alt={book.title}
+            fluid
+            className="rounded"
+            style={{ width: "auto", height: "auto" }}
           />
         </Col>
 

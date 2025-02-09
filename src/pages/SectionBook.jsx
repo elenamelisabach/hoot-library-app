@@ -11,6 +11,7 @@ export function SectionPage() {
   const query = useSelector((state) => state.search.query);
 
   const url = getBooksUrl({ query, subject: section });
+  console.log("Section Page URL:", url);
 
   const { data, loading } = useFetch(url);
   const books = data?.docs || [];
@@ -38,8 +39,7 @@ export function SectionPage() {
                 variant="warning"
                 style={{ fontSize: "20px", fontWeight: "500" }}
               >
-                No books found for <strong>"{query}"</strong>. Please try
-                another search.
+                No books found for {query} . Please try another search.
               </Alert>
             </Stack>
           ) : (

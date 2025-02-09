@@ -26,7 +26,7 @@ export function Checkout({ cover_i }) {
     zip: "",
     paymentMethod: "card",
   });
-
+  console.log("cover", cover_i);
   const bagCheck = useSelector((state) => state.bagCheck.list);
   const dispatch = useDispatch();
 
@@ -108,16 +108,16 @@ export function Checkout({ cover_i }) {
                         className="d-flex align-items-center"
                       >
                         <ImageCover
-                          imageId={cover_i}
+                          imageId={item.cover_i}
                           alt="No Image"
-                          width={60}
-                          height={90}
+                          style={{ width: "60px", height: "90px" }}
                           className="me-3 rounded"
                         />
-                        <Stack>
+                        <Stack className="ms-3">
                           <h6 className="mb-1">{item.title}</h6>
                           <p className="text-body-secondary">
-                            {item.author_name}
+                            {item.author_name?.slice(0, 2).join(", ")}
+                            {item.author_name?.length > 2 && " ..."}
                           </p>
                           <p className="fw-bold text-success">
                             €{item.price} x {item.quantity}
