@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hoot-library-app/static/css/main.8c5e1779.css",
+    "main.js": "/hoot-library-app/static/js/main.b11343ce.js",
+    "index.html": "/hoot-library-app/index.html",
+    "main.8c5e1779.css.map": "/hoot-library-app/static/css/main.8c5e1779.css.map",
+    "main.b11343ce.js.map": "/hoot-library-app/static/js/main.b11343ce.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c5e1779.css",
+    "static/js/main.b11343ce.js"
+  ]
+}
