@@ -3,91 +3,75 @@ import { useFetch } from "../hook/useFetch";
 import { BookPrice } from "../components/BookPrice";
 import { useDispatch, useSelector } from "react-redux";
 import { ImageCover } from "../components/ImageCover";
-
+import { LoadingSpinner } from "../components";
 import { getBookByIdUrl } from "../dataBooks/books";
+import { useState } from "react";
 import { addToBagCheck } from "../redux/BagCheckSlice";
-import {
-  Row,
-  Button,
-  Col,
-  Container,
-  Image,
-  ListGroup,
-  Spinner,
-} from "react-bootstrap";
+import { Row, Button, Col, Container, ListGroup } from "react-bootstrap";
 
 export function BookDetailPage() {
   const { title } = useParams();
   const dispatch = useDispatch();
+  const [showMessage, setShowMessage] = useState(false);
+  const url = getBookByIdUrl({ title });
+
+  const { data, loading } = useFetch(url);
+  const book = data?.docs?.[0] || {};
 
   const bagCheck = useSelector((state) => state.bagCheck.list);
   const isAddedToCart = bagCheck.some((book) => book.title === title);
 
-  const url = getBookByIdUrl({ title });
-  const { data, loading } = useFetch(url);
-  const book = data?.docs?.[0] || {};
+  const workId = book.key?.split("/").pop() || null;
 
-  const workId = book?.key?.split("/").pop();
   const descriptionUrl = workId
-    ? `https://openlibrary.org/works/${encodeURIComponent(workId)}.json`
+    ? `https://openlibrary.org/works/${workId}.json?format=json&jscmd=details`
     : null;
 
-  const { data: workData, loading: loadingWorkData } = useFetch(descriptionUrl);
-
+  const { data: workData, loading: loadingWorkData } = useFetch(
+    descriptionUrl ?? ""
+  );
   const description =
     workData?.description?.value ||
     workData?.description ||
     "No description available";
 
-  /*const coverUrl = book.cover_i
-    ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-    : "https://media.istockphoto.com/id/1093292834/vector/photo-coming-soon-picture-frame-vector-illustration.jpg?s=612x612&w=0&k=20&c=zacmLNhrQoir0Cu4ppV3F7EiDYSyZTXL59JFT2LS784=";*/
-
-  if (loading || loadingWorkData) {
-    return (
-      <Container className="min-vh-100 d-flex justify-content-center align-items-center">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </Container>
-    );
+  if (loading) {
+    return <LoadingSpinner />;
   }
 
   function handleAddToCart(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    dispatch(addToBagCheck({ title }));
+    dispatch(addToBagCheck({ title: book.title, cover_i: book.cover_i }));
+    setShowMessage(true);
+
+    setTimeout(() => setShowMessage(false), 2000);
   }
-  return (
-    <Container fluid className="min-vh-100 mt-5 px-3">
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
+    <Container fluid className="my-5 px-3">
       <Row className="justify-content-center align-items-center">
         <Col
-          xs={12}
-          md={4}
+          xs={10}
+          sm={8}
+          md={5}
+          lg={3}
           className="d-flex justify-content-center mb-4 mb-md-0"
         >
-          {/*  <Image
-            src={coverUrl}
-            alt={book.title}
-            fluid
-            className="rounded"
-            style={{ maxWidth: "100%", height: "auto", maxHeight: "500px" }}
-          />*/}
-
           <ImageCover
             imageId={book.cover_i}
-            alt={book.title}
             fluid
-            className="rounded"
-            style={{ width: "auto", height: "auto" }}
+            className="rounded img-fluid"
+            style={{ width: "75%", height: "auto" }}
           />
         </Col>
 
         <Col
           xs={12}
           md={6}
-          className="d-flex flex-column justify-content-center"
+          className="d-flex flex-column justify-content-center text-center text-md-start"
         >
           <h1 className="text-center mb-4 fs-3 fs-md-2 fs-lg-1 fw-bold">
             {book.title}
@@ -120,7 +104,6 @@ export function BookDetailPage() {
               </Col>
             </Row>
           </ListGroup>
-
           <Row className="justify-content-center mt-4">
             <Col xs={12} sm={8} md={6} lg={4}>
               <Button
@@ -130,6 +113,11 @@ export function BookDetailPage() {
               >
                 Add to basket
               </Button>
+              {showMessage && (
+                <p className="mt-2 p-2 text-center text-success fw-medium">
+                  Added to cart!
+                </p>
+              )}
             </Col>
           </Row>
         </Col>

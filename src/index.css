@@ -51,6 +51,13 @@ code {
   background: linear-gradient(90deg, #5c3d2e, #8a6d52, #c3a884);
   color: rgba(255, 255, 255, 0.9);
 }
+.cursor {
+  cursor: pointer;
+}
+
+.height-page {
+  height: calc(100%-206px);
+}
 
 .order-img {
   max-width: 100%;

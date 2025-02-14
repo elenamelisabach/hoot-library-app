@@ -11,7 +11,7 @@ import { Checkout } from "./pages";
 function App() {
   return (
     <Provider store={store}>
-      <Container fluid className="p-0">
+      <Container fluid className="p-0 d-flex flex-column min-vh-100">
         <BrowserRouter>
           <Header />
           <Routes>

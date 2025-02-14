@@ -16,7 +16,7 @@ export function Footer() {
   };
 
   return (
-    <Container fluid className=" text-center py-3 mt-auto footer ">
+    <Container fluid className="text-center py-3 footer mt-auto">
       <Row className="text-white">
         <Col md={4} className="d-flex flex-column align-items-center">
           <h5> HootLibrary</h5>
@@ -37,10 +37,27 @@ export function Footer() {
         <Col md={4} className="d-flex flex-column align-items-center">
           <h5 className="">Follow Us</h5>
           <Nav className="d-flex flex-row align-items-center">
-            <FaFacebookSquare size={30} className="me-3" />
-            <FaInstagramSquare size={30} className="me-3" />
-            <FaSquareXTwitter size={30} className="me-3" />
-            <FaTiktok size={30} className="me-3" />
+            <FaFacebookSquare
+              size={30}
+              className="me-3 cursor"
+              style={{ color: "#1877F2" }}
+            />
+
+            <FaInstagramSquare
+              size={30}
+              className="me-3 cursor"
+              style={{ color: "#E1306C" }}
+            />
+            <FaSquareXTwitter
+              size={30}
+              className="me-3 cursor"
+              style={{ color: "#000" }}
+            />
+            <FaTiktok
+              size={30}
+              className="me-3 cursor"
+              style={{ color: "#000" }}
+            />
           </Nav>
         </Col>
       </Row>

@@ -1,12 +1,4 @@
-import {
-  Nav,
-  Navbar,
-  Container,
-  Image,
-  Stack,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Nav, Navbar, Container, Image, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoBagCheck } from "react-icons/io5";
@@ -34,12 +26,20 @@ export function Header() {
   const location = useLocation();
 
   const isBookDetailsPage = location.pathname.startsWith("/books/");
+  const isCheckoutPage = location.pathname.startsWith("/checkout");
+  const isFooterPage =
+    location.pathname.startsWith("/about-us") ||
+    location.pathname.startsWith("/contact");
 
   function onRouteChange(route) {
     navigate(`/section/${route}`);
   }
   return (
-    <Navbar expand="lg" className={styles.navbar}>
+    <Navbar
+      expand="lg"
+      sticky="top"
+      className={`${styles.navbar} flex-shrink-0`}
+    >
       <Container className="ms-2 text-light" fluid>
         <Link to="/" className={styles.logo}>
           <Image
@@ -75,7 +75,11 @@ export function Header() {
           </Nav>
         </Navbar.Collapse>
         <Row className="flex-grow-1 w-100 ">
-          <Col className="">{!isBookDetailsPage && <Search />}</Col>
+          <Col className="">
+            {!isBookDetailsPage && !isCheckoutPage && !isFooterPage && (
+              <Search />
+            )}
+          </Col>
         </Row>
 
         <Row className="align-items-center justify-content-end">

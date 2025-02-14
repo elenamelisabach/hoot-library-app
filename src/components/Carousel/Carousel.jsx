@@ -1,12 +1,10 @@
 import { Carousel, Container, Image } from "react-bootstrap";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
 export function CustomCarousel() {
   return (
     <Container fluid className="bs-secondary-bg">
       <Container>
-        <Carousel className=" justify-content-center align-items-center m-auto">
+        <Carousel className="justify-content-center align-items-center m-auto">
           <Carousel.Item>
             <Image
               className="d-block w-100 "

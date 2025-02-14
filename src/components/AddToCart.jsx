@@ -1,4 +1,4 @@
-import { Offcanvas, Button, ListGroup, Image, Stack } from "react-bootstrap";
+import { Offcanvas, Button, ListGroup, Stack } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { removeFromBagCheck } from "../redux/BagCheckSlice";
 import { addToBagCheck } from "../redux/BagCheckSlice";
@@ -27,6 +27,7 @@ export function AddToCart({
       alert("Your cart is empty!");
       return;
     }
+    handleClose();
 
     navigate("/checkout");
   };
@@ -70,18 +71,26 @@ export function AddToCart({
             {bagCheck.map((item, index) => (
               <ListGroup.Item
                 key={index}
-                className="d-flex justify-content-between align-items-center"
+                className="d-flex flex-wrap justify-content-between align-items-center gap-2 p-2"
               >
                 <ImageCover
-                  imageId={item.cover_i} // Folosește `cover_i` pentru ID-ul imaginii
-                  alt="No Image"
-                  style={{ width: "50px", height: "75px" }} // Poți ajusta dimensiunile
-                  className="me-3"
+                  imageId={item.cover_i}
+                  style={{ width: "50px", height: "75px" }}
                 />
 
-                <Stack className="d-flex flex-column flex-grow-1">
-                  <h6 className="mb-1">{item.title}</h6>
-                  <p className=" text-body-secondary fst-italic">
+                <Stack className="flex-grow-1 ms-2" style={{ minWidth: "0px" }}>
+                  <h6
+                    className="mb-1 text-truncate"
+                    style={{
+                      maxWidth: "100%",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {item.title}
+                  </h6>
+                  <p className=" text-body-secondary fst-italic small">
                     Quantity: {item.quantity}
                   </p>
                   <BookPrice title={item.title} />
