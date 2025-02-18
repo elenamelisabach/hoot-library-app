@@ -1,4 +1,12 @@
-import { Nav, Navbar, Container, Image, Row, Col } from "react-bootstrap";
+import {
+  Nav,
+  Navbar,
+  Container,
+  Image,
+  Row,
+  Stack,
+  Col,
+} from "react-bootstrap";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoBagCheck } from "react-icons/io5";
@@ -74,18 +82,19 @@ export function Header() {
             ))}
           </Nav>
         </Navbar.Collapse>
-        <Row className="flex-grow-1 w-100 ">
+        <Stack direction="horizontal" gap={3} className="w-100">
           <Col className="">
             {!isBookDetailsPage && !isCheckoutPage && !isFooterPage && (
               <Search />
             )}
           </Col>
-        </Row>
 
-        <Row className="align-items-center justify-content-end">
-          <Col xs="auto" className="position-relative">
+          <Col
+            xs="auto"
+            className="position-relative d-flex align-items-center"
+          >
             <IoBagCheck
-              className="fs-2 text-white ms-auto me-5"
+              className={`fs-2 text-white ms-auto me-5 ${styles.cartIcon}`}
               onClick={() => setShowCart(true)}
             />
             <span
@@ -97,7 +106,7 @@ export function Header() {
               {bagCheck.reduce((total, book) => total + book.quantity, 0)}
             </span>
           </Col>
-        </Row>
+        </Stack>
       </Container>
       <AddToCart
         show={showCart}
